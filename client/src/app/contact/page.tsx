@@ -10,7 +10,7 @@ import { HiMail, HiPhone, HiLocationMarker, HiPaperAirplane } from 'react-icons/
 import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
 import toast from 'react-hot-toast';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://taskflow-1-g1ao.onrender.com/api';
 
 const contactInfo = [
     {

@@ -3,7 +3,7 @@
  * Centralized API calls with axios
  */
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://taskflow-1-g1ao.onrender.com/api';
 
 /**
  * Custom fetch wrapper with credentials
