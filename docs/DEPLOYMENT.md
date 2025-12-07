@@ -46,22 +46,6 @@ Your backend code is already in the `/server` directory. Render will automatical
 ## 🔐 Step 3: Add Environment Variables
 
 In the Render dashboard, scroll to **"Environment Variables"** and add:
-
-| Key | Value | Example |
-|-----|-------|---------|
-| `PORT` | `5000` | `5000` |
-| `MONGO_URI` | Your MongoDB Atlas connection string | `mongodb+srv://jzjdgg13532_db_user:w0UyZolSMa11HfGI@cluster0.zzhmbla.mongodb.net/?appName=Cluster0` |
-| `JWT_SECRET` | Strong random string (min 32 chars) | Generate: `openssl rand -base64 32` |
-| `CLIENT_URL` | Your Vercel frontend URL | `https://taskflow-psi-two.vercel.app/` |
-| `NODE_ENV` | `production` | `production` |
-| `EMAIL_USER` | (Optional) Your Gmail | `jzjdgg13532@gmail.com` |
-| `EMAIL_PASS` | (Optional) Gmail App Password | `zgwsdgygbiypdkjp` |
-
-> 💡 **Tip:** Generate a secure JWT secret using:
-> ```bash
-> openssl rand -base64 32
-> ```
-
 ---
 
 ## 📡 Step 4: Deploy!
