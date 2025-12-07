@@ -14,6 +14,7 @@ const connectDB = require('./config/db');
 // Route imports
 const authRoutes = require('./routes/auth');
 const taskRoutes = require('./routes/tasks');
+const contactRoutes = require('./routes/contact');
 
 // Initialize Express app
 const app = express();
@@ -65,6 +66,7 @@ app.get('/api/health', (req, res) => {
 // API routes
 app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoutes);
+app.use('/api/contact', contactRoutes);
 
 // 404 handler
 app.use((req, res) => {

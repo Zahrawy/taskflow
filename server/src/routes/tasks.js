@@ -19,8 +19,8 @@ const router = express.Router();
 // All routes are protected
 router.use(protect);
 
-// Validation rules
-const taskValidation = [
+// Validation rules for creating a new task
+const createTaskValidation = [
     body('title')
         .trim()
         .notEmpty()
@@ -46,14 +46,42 @@ const taskValidation = [
         .withMessage('Due date must be a valid date')
 ];
 
+// Validation rules for updating a task (all fields optional)
+const updateTaskValidation = [
+    body('title')
+        .optional()
+        .trim()
+        .notEmpty()
+        .withMessage('Title cannot be empty')
+        .isLength({ max: 100 })
+        .withMessage('Title cannot exceed 100 characters'),
+    body('description')
+        .optional()
+        .trim()
+        .isLength({ max: 500 })
+        .withMessage('Description cannot exceed 500 characters'),
+    body('status')
+        .optional()
+        .isIn(['todo', 'in-progress', 'done'])
+        .withMessage('Status must be todo, in-progress, or done'),
+    body('priority')
+        .optional()
+        .isIn(['low', 'medium', 'high'])
+        .withMessage('Priority must be low, medium, or high'),
+    body('dueDate')
+        .optional()
+        .isISO8601()
+        .withMessage('Due date must be a valid date')
+];
+
 // Routes
 router.route('/')
     .get(getTasks)
-    .post(validate(taskValidation), createTask);
+    .post(validate(createTaskValidation), createTask);
 
 router.route('/:id')
     .get(getTask)
-    .put(validate(taskValidation), updateTask)
+    .put(validate(updateTaskValidation), updateTask)
     .delete(deleteTask);
 
 module.exports = router;

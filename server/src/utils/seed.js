@@ -70,13 +70,10 @@ const seedDatabase = async () => {
 
         // Create demo user
         console.log('👤 Creating demo user...');
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(DEMO_USER.password, salt);
-
         const demoUser = await User.create({
             name: DEMO_USER.name,
             email: DEMO_USER.email,
-            password: hashedPassword
+            password: DEMO_USER.password
         });
         console.log(`✅ Demo user created: ${demoUser.email}`);
 
