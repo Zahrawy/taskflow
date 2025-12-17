@@ -24,7 +24,26 @@ connectDB();
 
 // CORS configuration (MUST be first)
 app.use(cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:3000',
+    origin: (origin, callback) => {
+        // Allow requests with no origin (like mobile apps or curl requests)
+        if (!origin) return callback(null, true);
+
+        // Define allowed origins
+        const allowedOrigins = [
+            process.env.CLIENT_URL,
+            'http://localhost:3000',
+            'https://taskflow-psi-two.vercel.app'
+        ];
+
+        // Check if origin is allowed
+        // 1. Exact match with allowed list
+        // 2. It is a Vercel preview deployment (ends with .vercel.app and contains taskflow)
+        if (allowedOrigins.includes(origin) || (origin.endsWith('.vercel.app') && origin.includes('taskflow'))) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true, // Enable cookies
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
