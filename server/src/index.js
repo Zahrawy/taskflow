@@ -22,6 +22,14 @@ const app = express();
 // Connect to MongoDB
 connectDB();
 
+// CORS configuration (MUST be first)
+app.use(cors({
+    origin: process.env.CLIENT_URL || 'http://localhost:3000',
+    credentials: true, // Enable cookies
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 // Security middleware
 app.use(helmet());
 
@@ -38,14 +46,6 @@ const limiter = rateLimit({
     }
 });
 app.use('/api', limiter);
-
-// CORS configuration
-app.use(cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:3000',
-    credentials: true, // Enable cookies
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-}));
 
 // Body parsing middleware
 app.use(express.json());
